@@ -118,5 +118,5 @@ fi
 
 # my settings
 alias vim='nvim'
-#export PS1="\e[1;33m\u@\h:\W\$ \e[0m"
+export PS1="\e[1;33m\u@\h:\w\$ \e[0m"
 #export PS1="\e[0;33m\W\$ \e[0;m"
