@@ -1,8 +1,0 @@
-{
-	"diagnostic.checkCurrentLine": true,
-	"suggest.noselect": false,
-	"suggest.labelMaxLength": 40,
-	"diagnostic.errorSign": "E",
-	"diagnostic.infoSign": "I",
-	"diagnostic.warningSign":"W"
-}

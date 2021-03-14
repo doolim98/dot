@@ -64,13 +64,13 @@ fi
 unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
+# case "$TERM" in
+# xterm*|rxvt*)
+#     PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+#     ;;
+# *)
+#     ;;
+# esac
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -116,7 +116,31 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# my settings
+####### MY SETTINGS #######
+
 alias vim='nvim'
-export PS1="\e[1;33m\u@\h:\w\$ \e[0m"
-#export PS1="\e[0;33m\W\$ \e[0;m"
+alias vim='~/nvim.appimage'
+alias tmux='tmux -2'
+# export PS1="\e[1;33m\u@\h:\w\$ \e[0m"
+export PS1="\e[0;33m\W\$ \e[0;m"
+# my functions
+function my_color_test()
+{
+	for i in {0..255} ; do
+		printf "\x1b[48;5;%sm%3d\e[0m " "$i" "$i"
+		if (( i == 15 )) || (( i > 15 )) && (( (i-15) % 6 == 0 )); then
+			printf "\n";
+		fi
+	done
+}
+# my functions
+function my_font_test()
+{
+	echo -e "\e[1mbold\e[0m"
+	echo -e "\e[3mitalic\e[0m"
+	echo -e "\e[3m\e[1mbold italic\e[0m"
+	echo -e "\e[4munderline\e[0m"
+	echo -e "\e[9mstrikethrough\e[0m"
+	echo -e "\e[31mHello World\e[0m"
+	echo -e "\x1B[31mHello World\e[0m"
+}
