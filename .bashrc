@@ -118,8 +118,9 @@ fi
 
 ####### MY SETTINGS #######
 
-alias vim='nvim'
-alias vim='~/nvim.appimage'
+alias vim='vim'
+#alias vim='nvim'
+#alias vim='~/nvim.appimage'
 alias tmux='tmux -2'
 # export PS1="\e[1;33m\u@\h:\w\$ \e[0m"
 export PS1="\e[0;33m\W\$ \e[0;m"
