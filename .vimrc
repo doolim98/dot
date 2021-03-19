@@ -9,9 +9,13 @@ endif
 " plugins
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-commentary'
-Plug 'google/vim-maktaba'
-Plug 'google/vim-codefmt'
-Plug 'google/vim-glaive'
+Plug 'farmergreg/vim-lastplace'
+
+" Plug 'google/vim-maktaba'
+" Plug 'google/vim-codefmt'
+" Plug 'google/vim-glaive'
+" Plug 'prabirshrestha/vim-lsp'
+" Plug 'mattn/vim-lsp-settings'
 call plug#end()
 
 
@@ -33,6 +37,13 @@ function! LoadProjVimrc()
 	endif
 endfunction
 
+function! CdToGit()
+	let dir = finddir(".git", ".;")
+	if !empty(dir)
+		exec "cd" dir."/.."
+	endif
+endfunction
+
 
 function! LoadGtagsConfig()
 	let csf=findfile("GTAGS", ".;")
@@ -47,10 +58,23 @@ function! LoadGtagsConfig()
 	endif
 endfunction
 
+function! LoadLinterConfig()
+	function! RunLinter()
+	endfunction
+	let g:linter=""
+	let g:linter_cmds={
+				\"python":"!pyflakes %",
+				\"c":"!cppcheck %"
+				\}
+	nnoremap <leader>xl :call RunLinter()<CR>
 
-function! LoadLspConfig()
+	" augroup linter
+	" 	au!
+	" 	autocmd Filetype python let g:linter=g:py_linter
+	" 	autocmd Filetype c let g:linter=g:c_linter
+	" augroup END
+
 endfunction
-
 
 function! ToggleQuickFix()
 	if empty(filter(getwininfo(), 'v:val.quickfix'))
@@ -60,25 +84,47 @@ function! ToggleQuickFix()
 	endif
 endfunction
 
+function! GetOutputFromShell(cmd)
+	execute("silent !".a:cmd." > /tmp/.vim.tmp")
+	let ret = system("cat /tmp/.vim.tmp")
+	redraw!
+	return ret
+endfunction
+
+function! OpenFileFromShell(cmd)
+	let out = GetOutputFromShell(a:cmd)
+	if !empty(out)
+		exec "e" out
+	endif
+endfunction
+
+
 " apperance
 colorscheme desert
+" set t_Co=256
+set term=xterm-256color
 set laststatus=2
 " set statusline=%f%=%P
 set statusline=%f\ [%l/%L]%=%n
 set noshowcmd
 set signcolumn=no
-set fillchars=vert:│
+set fillchars=vert:\ 
 set pumheight=20
-set cmdheight=2
-set cursorline
+set cmdheight=1
+set nocursorline
 set number
-
+set wildmenu
+highlight Pmenu ctermfg=245 ctermbg=255
+highlight PmenuSel ctermfg=16 ctermbg=255
+highlight PmenuSbar ctermfg=245 ctermbg=255
+highlight PmenuThumb ctermfg=16 ctermbg=16
 
 " simple settings
 let mapleader=" " 
+syntax off
 set tags=./tags;/
-set scrolloff=7
-set mouse=a
+" set scrolloff=7
+set mouse=
 filetype plugin on
 set omnifunc=syntaxcomplete#Complete
 set smartindent
@@ -87,38 +133,24 @@ set shiftwidth=4
 set hidden
 set nobackup
 set nowritebackup
-set updatetime=100
-" set shortmess+=c
-" set noincsearch
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+set shortmess=at
+set incsearch
 set ignorecase
 
-" functions
+" keymappings
 nnoremap <Leader>r :so ~/.vimrc<CR>
 nnoremap <Leader>pi :PlugInstall<CR>
 nnoremap <Leader>b :ls<CR>:b
 nnoremap <Leader>m :make 
 nnoremap <Leader>s :w<CR>
+" nnoremap <Leader>o :Files<CR>
 nmap <C-_> <Plug>CommentaryLine
 vmap <C-_> <Plug>Commentary
-
-
-augroup autoformat_settings
-	autocmd FileType bzl AutoFormatBuffer buildifier
-	autocmd FileType c,cpp,proto,javascript,arduino AutoFormatBuffer clang-format
-	autocmd FileType dart AutoFormatBuffer dartfmt
-	autocmd FileType go AutoFormatBuffer gofmt
-	autocmd FileType gn AutoFormatBuffer gn
-	autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
-	autocmd FileType java AutoFormatBuffer google-java-format
-	autocmd FileType python AutoFormatBuffer yapf
-	" Alternative: autocmd FileType python AutoFormatBuffer autopep8
-	autocmd FileType rust AutoFormatBuffer rustfmt
-	autocmd FileType vue AutoFormatBuffer prettier
-augroup END
-
+nnoremap <Leader>o :call OpenFileFromShell("fzf")<CR>
 
 " quickfix
-nnoremap <silent> <C-n> :1cn<CR>
+nnoremap <silent> <C-n> :0cn<CR>
 nnoremap <silent> <C-p> :1cp<CR>
 nnoremap <silent> <C-q> :call ToggleQuickFix()<cr>
 
@@ -128,21 +160,8 @@ nnoremap <silent> <C-c> :noh<CR>
 set cscopequickfix=s-,c-,d-,i-,t-,e-,a-
 
 
-" -- Linter
-let g:py_linter="!pyflakes %"
-let g:c_linter="!cppcheck %"
+call LoadLinterConfig()
 
-function! Linter()
-	let linter=""
-	if &filetype == 'c'
-		let linter=g:c_linter
-	elseif &filetype =='cpp'
-		let linter=g:c_linter
-	elseif &filetype == 'python'
-		let linter=g:py_linter
-	endif
-	cgetexpr! execute(linter)
-endfunction
-
+" Proj level management
+call CdToGit()
 call LoadProjVimrc()
-
