@@ -120,12 +120,20 @@ fi
 
 alias vim='vim'
 #alias vim='nvim'
-#alias vim='~/nvim.appimage'
 alias tmux='tmux -2'
 # export PS1="\e[1;33m\u@\h:\w\$ \e[0m"
 # export PS1="\e[0;33m\W\$ \e[0;m"
-export PS1="\e[7m\W\$\e[0;m "
+# export PS1="\e[7m\W\$\e[0m "
+# export PS1='\[\033[7m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+export PS1='\[\033[00m\]\u@\h:\w\$ \[\033[7m\]'
+trap pre_command DEBUG
+# export PROMPT_COMMAND="echo -e '\033[00m'"
 # my functions
+function pre_command()
+{
+	echo -ne '\033[00m'
+}
+
 function my_color_test()
 {
 	for i in {0..255} ; do
