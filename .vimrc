@@ -10,6 +10,7 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-commentary'
 Plug 'farmergreg/vim-lastplace'
+Plug 'mileszs/ack.vim'
 
 " Plug 'google/vim-maktaba'
 " Plug 'google/vim-codefmt'
@@ -50,10 +51,9 @@ function! LoadGtagsConfig()
 	let csp=matchstr(csf, ".*/")
 	if !empty(csf) && filereadable(csf)
 		set csprg=gtags-cscope
-		echo csf
-		echo csp
 		exe "cs add" csf csp
 		nnoremap gd :cs find g <cword><CR>
+		nnoremap gs :cs find s <cword><CR>
 		nnoremap gs :cs find s <cword><CR>
 	endif
 endfunction
@@ -100,7 +100,7 @@ endfunction
 
 
 " apperance
-colorscheme desert
+colorscheme default
 " set t_Co=256
 set term=xterm-256color
 set laststatus=2
@@ -110,7 +110,7 @@ set noshowcmd
 set signcolumn=no
 set fillchars=vert:\ 
 set pumheight=20
-set cmdheight=1
+set cmdheight=2
 set nocursorline
 set number
 set wildmenu
@@ -121,7 +121,7 @@ highlight PmenuThumb ctermfg=16 ctermbg=16
 
 " simple settings
 let mapleader=" " 
-syntax off
+syntax on
 set tags=./tags;/
 " set scrolloff=7
 set mouse=
@@ -134,7 +134,8 @@ set hidden
 set nobackup
 set nowritebackup
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-set shortmess=at
+set shortmess=a
+set nocsverb
 set incsearch
 set ignorecase
 
@@ -144,6 +145,7 @@ nnoremap <Leader>pi :PlugInstall<CR>
 nnoremap <Leader>b :ls<CR>:b
 nnoremap <Leader>m :make 
 nnoremap <Leader>s :w<CR>
+nnoremap <Leader>f :Ack <cword><CR>
 " nnoremap <Leader>o :Files<CR>
 nmap <C-_> <Plug>CommentaryLine
 vmap <C-_> <Plug>Commentary
@@ -152,12 +154,13 @@ nnoremap <Leader>o :call OpenFileFromShell("fzf")<CR>
 " quickfix
 nnoremap <silent> <C-n> :0cn<CR>
 nnoremap <silent> <C-p> :1cp<CR>
-nnoremap <silent> <C-q> :call ToggleQuickFix()<cr>
+nnoremap <silent> <Leader>q :call ToggleQuickFix()<cr>
+
 
 " search
 nnoremap <silent> <C-c> :noh<CR>
 
-set cscopequickfix=s-,c-,d-,i-,t-,e-,a-
+set cscopequickfix=s-,g-,c-,d-,i-,t-,e-,a-
 
 
 call LoadLinterConfig()
@@ -165,3 +168,4 @@ call LoadLinterConfig()
 " Proj level management
 call CdToGit()
 call LoadProjVimrc()
+call LoadGtagsConfig()
