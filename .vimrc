@@ -101,11 +101,11 @@ endfunction
 
 " apperance
 colorscheme default
-set t_Co=256
-" set term=xterm-256color
+" set t_Co=256
+set term=xterm-256color
 set laststatus=2
 " set statusline=%f%=%P
-set statusline=%f\ [%l/%L]%=%n
+" set statusline=%f\ [%l/%L]%=%n
 set noshowcmd
 set signcolumn=no
 set fillchars=vert:\ 
@@ -141,6 +141,7 @@ set incsearch
 set ignorecase
 
 " keymappings
+set pastetoggle=<F11>
 nnoremap <Leader>r :so ~/.vimrc<CR>
 nnoremap <Leader>pi :PlugInstall<CR>
 nnoremap <Leader>b :ls<CR>:b

@@ -63,15 +63,6 @@ else
 fi
 unset color_prompt force_color_prompt
 
-# If this is an xterm set the title to user@host:dir
-# case "$TERM" in
-# xterm*|rxvt*)
-#     PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-#     ;;
-# *)
-#     ;;
-# esac
-
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -85,7 +76,7 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # colored GCC warnings and errors
-#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # some more ls aliases
 alias ll='ls -alF'
@@ -118,16 +109,12 @@ fi
 
 ####### MY SETTINGS #######
 
+export TERM=xterm-256color
 alias vim='vim'
 #alias vim='nvim'
 alias tmux='tmux -2'
-# export PS1="\e[1;33m\u@\h:\w\$ \e[0m"
-# export PS1="\e[0;33m\W\$ \e[0;m"
-# export PS1="\e[7m\W\$\e[0m "
-# export PS1='\[\033[7m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-export PS1='\[\033[00m\]\u@\h:\w\$ \[\033[7m\]'
+export PS1='\[\033[07m\]\w\[\033[00m\] '
 trap pre_command DEBUG
-# export PROMPT_COMMAND="echo -e '\033[00m'"
 # my functions
 function pre_command()
 {
