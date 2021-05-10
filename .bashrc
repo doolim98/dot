@@ -110,12 +110,39 @@ fi
 ####### MY SETTINGS #######
 
 export TERM=xterm-256color
+
+# ALIAS
+alias b='cd ..'
+alias bb='cd ../..'
+alias bbb='cd ../../..'
+alias pu.='pushd .'
+alias pu='pushd'
+alias po='popd'
 alias vim='vim'
+alias open='xdg-open'
 #alias vim='nvim'
 alias tmux='tmux -2'
-export PS1='\[\033[07m\]\w\[\033[00m\] '
+alias ts='tmux split-window'
+alias tv='tmux split-window -h'
+alias my_mkrtfs=" find . | cpio -H newc -o | gzip > rootfs.img.gz"
+export PS1='\[\033[07m\]\u@\h\[\033[00m\] \[\033[07m\] \w\[\033[00m\] '
+# export PS1='\u@\h \[\033[07m\]\w\[\033[00m\] '
 trap pre_command DEBUG
 # my functions
+
+function export_path()
+{
+	export PATH=$PWD:$PATH
+	# echo "export PATH=$PWD:\$PATH" >> ~/.bashrc 
+}
+
+function add_path()
+{
+	export PATH=$PWD:$PATH
+	echo "export PATH=$PWD:\$PATH" >> ~/.bashrc 
+}
+
+
 function pre_command()
 {
 	echo -ne '\033[00m'
@@ -146,3 +173,7 @@ function my_reload()
 {
 	source ~/.bashrc
 }
+
+# END USER CONFIG 
+export PATH=/home/hjoll6/pap/gcc-arm-10.2-2020.11-x86_64-aarch64-none-linux-gnu/bin:$PATH
+export PATH=/home/hjoll6/pap/qemu-5.2.0/build:$PATH

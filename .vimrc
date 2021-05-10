@@ -30,10 +30,12 @@ nnoremap [q :colder<CR>
 
 
 function! LoadProjVimrc()
-	let file=findfile(".proj_vimrc", ".;")
+	let file=findfile(".vimproj", ".;")
 	let path=matchstr(file, ".*/")
 	if !empty(file) && filereadable(file)
 		exe 'so' file
+	endif
+	if !empty(path)
 		exe 'cd' path
 	endif
 endfunction
@@ -165,9 +167,9 @@ nnoremap <silent> <C-c> :noh<CR>
 set cscopequickfix=s-,g-,c-,d-,i-,t-,e-,a-
 
 
-call LoadLinterConfig()
+" call LoadLinterConfig()
 
 " Proj level management
-call CdToGit()
 call LoadProjVimrc()
 call LoadGtagsConfig()
+" call CdToGit()
