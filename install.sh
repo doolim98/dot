@@ -1,10 +1,12 @@
 #!/bin/bash
-ln -sf $(pwd)/.tmux.conf ~
-ln -sf $(pwd)/.screenrc ~
-ln -sf $(pwd)/.bashrc ~
-ln -sf $(pwd)/.vimrc ~
+ln -svf $(pwd)/home/.[!.]?* ~/
+#ln -sf $(pwd)/home/.screenrc ~
+#ln -sf $(pwd)/home/.bashrc ~
+#ln -sf $(pwd)/home/.vimrc ~
 
 # nvim settings
-ln -sf $(pwd)/init.vim ~/.config/nvim
-ln -sf $(pwd)/lsp-settings.vim ~/.config/nvim
+# mkdir -p ~/.config/nvim
+ln -sf $(pwd)/nvim ~/.config
+# ln -sf $(pwd)/init.vim ~/.config/nvim
+# ln -sf $(pwd)/lsp-settings.vim ~/.config/nvim
 # ln -sf $(pwd)/coc-settings.json ~/.config/nvim
