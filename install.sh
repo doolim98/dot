@@ -1,12 +1,15 @@
 #!/bin/bash
-ln -svf $(pwd)/home/.[!.]?* ~/
-#ln -sf $(pwd)/home/.screenrc ~
-#ln -sf $(pwd)/home/.bashrc ~
-#ln -sf $(pwd)/home/.vimrc ~
+cd $(dirname "$0")
 
-# nvim settings
-# mkdir -p ~/.config/nvim
-ln -sf $(pwd)/nvim ~/.config
-# ln -sf $(pwd)/init.vim ~/.config/nvim
-# ln -sf $(pwd)/lsp-settings.vim ~/.config/nvim
-# ln -sf $(pwd)/coc-settings.json ~/.config/nvim
+lsdir(){
+	find $1 -maxdepth 1 -mindepth 1
+}
+
+# home config files
+echo "HOME"
+ln -svf $(lsdir $PWD/home/) ~/
+
+# nvim config files
+echo "NEOVIM"
+mkdir -p ~/.config/nvim
+ln -svf $(lsdir $PWD/nvim/) ~/
