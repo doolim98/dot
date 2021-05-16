@@ -129,7 +129,18 @@ alias conda-shell="eval $($HOME'/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /de
 # alias conda-shell='eval `/home/hjoll6/anaconda3/bin/conda shell.bash hook`'
 export PS1='\[\033[07m\]\u@\h\[\033[00m\] \[\033[07m\] \w\[\033[00m\] '
 # export PS1='\u@\h \[\033[07m\]\w\[\033[00m\] '
+
+# Base16 Shell
+BASE16_SHELL="$HOME/.config/base16-shell/"
+[ -n "$PS1" ] && \
+    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+        eval "$("$BASE16_SHELL/profile_helper.sh")"
+
 trap pre_command DEBUG
+
+
+
+
 # my functions
 
 function export_path()

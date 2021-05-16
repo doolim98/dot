@@ -6,15 +6,17 @@ set tags=./tags;/
 " set scrolloff=7
 set mouse=
 filetype plugin on
-set omnifunc=syntaxcomplete#Complete
+
 set smartindent
 set tabstop=4
 set shiftwidth=4
 set hidden
 set nobackup
 set nowritebackup
+set noswapfile
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-set shortmess=a
+
+set shortmess+=c
 set nocsverb
 set incsearch
 set ignorecase

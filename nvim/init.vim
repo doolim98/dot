@@ -12,6 +12,7 @@ Plug 'farmergreg/vim-lastplace'
 Plug 'mileszs/ack.vim'
 
 Plug 'neovim/nvim-lspconfig'
+Plug 'kabouzeid/nvim-lspinstall'
 Plug 'nvim-lua/completion-nvim'
 
 Plug 'tpope/vim-sensible'
@@ -19,6 +20,12 @@ Plug 'tpope/vim-sensible'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+
+Plug 'morhetz/gruvbox'
+Plug 'chriskempson/base16-vim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  
+
+
 
 call plug#end()
 
@@ -28,6 +35,7 @@ source ~/.config/nvim/my_nvim/apperance.vim
 source ~/.config/nvim/my_nvim/key.vim
 source ~/.config/nvim/my_nvim/functions.vim
 luafile ~/.config/nvim/my_nvim/lsp.lua
+luafile ~/.config/nvim/my_nvim/ts.lua
 
 
 " call LoadLinterConfig()
