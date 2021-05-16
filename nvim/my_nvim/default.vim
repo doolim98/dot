@@ -21,3 +21,15 @@ set nocsverb
 set incsearch
 set ignorecase
 set number
+
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+set foldlevelstart=99
+
+set foldtext=MyFoldText()
+
+" function MyFoldText()
+" 	let line = getline(v:foldstart)
+" 	let sub = substitute(line, '/\*\|\*/\|{{{\d\=', '', 'g')
+" 	return v:folddashes . sub
+" endfunction

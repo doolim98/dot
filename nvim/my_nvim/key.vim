@@ -37,6 +37,9 @@ nnoremap [t gT
 nnoremap ]q :cnewer<CR>
 nnoremap [q :colder<CR>
 
+" folding
+nnoremap <Tab> za
+
 " Completion
 set completeopt=menuone,noinsert
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
