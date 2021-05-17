@@ -17,3 +17,8 @@ ln -svf $(lsdir $PWD/nvim/) ~/.config/nvim/
 # base16 config files
 echo "BASE16"
 ln -svf $PWD/base16-shell ~/.config
+
+# kitty config files
+echo "KITTY"
+mkdir -p ~/.config/kitty
+ln -svf $(lsdir $PWD/kitty/) ~/.config/kitty/

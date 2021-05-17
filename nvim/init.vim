@@ -30,12 +30,13 @@ call plug#end()
 
 " source config files
 source ~/.config/nvim/my_nvim/default.vim
-source ~/.config/nvim/my_nvim/apperance.vim
 source ~/.config/nvim/my_nvim/key.vim
 source ~/.config/nvim/my_nvim/functions.vim
 luafile ~/.config/nvim/my_nvim/lsp.lua
 luafile ~/.config/nvim/my_nvim/ts.lua
 
+" apperance setting
+source ~/.config/nvim/my_nvim/apperance.vim
 
 " call LoadLinterConfig()
 

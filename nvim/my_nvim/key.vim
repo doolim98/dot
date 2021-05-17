@@ -1,3 +1,5 @@
+" unmapped keys
+nnoremap <C-w><C-c> <Nop>
 " keymappings
 set pastetoggle=<F11>
 nnoremap <Leader>r :so ~/.config/nvim/init.vim<CR>
@@ -5,11 +7,33 @@ nnoremap <Leader>pi :PlugInstall<CR>
 nnoremap <Leader>b :ls<CR>:b
 nnoremap <Leader>m :make 
 nnoremap <Leader>s :w<CR>
-nnoremap <Leader>f :Ack <cword><CR>
 " nnoremap <Leader>o :Files<CR>
 nmap <C-_> <Plug>CommentaryLine
 vmap <C-_> <Plug>Commentary
-nnoremap <Leader>o :call OpenFileFromShell("fzf")<CR>
+
+" window
+nnoremap <Leader>1 1<C-w><C-w>
+nnoremap <Leader>2 2<C-w><C-w>
+nnoremap <Leader>3 3<C-w><C-w>
+nnoremap <Leader>4 4<C-w><C-w>
+nnoremap <Leader>5 5<C-w><C-w>
+nnoremap <Leader>6 6<C-w><C-w>
+nnoremap <Leader>7 7<C-w><C-w>
+nnoremap <Leader>8 8<C-w><C-w>
+nnoremap <Leader>9 9<C-w><C-w>
+nnoremap <Leader>wq <C-w>q
+nnoremap <Leader>wh <C-w>h
+nnoremap <Leader>wj <C-w>j
+nnoremap <Leader>wk <C-w>k
+nnoremap <Leader>wl <C-w>l
+nnoremap <Leader>wv <C-w>v
+nnoremap <Leader>ws <C-w>s
+nnoremap <Leader>wo <C-w>o
+nnoremap <Leader>wp <C-w>p
+nnoremap <Leader><Leader> <C-w>p
+
+" terminal
+tmap <C-c> <C-\><C-n>
 
 " Telescope
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
@@ -38,7 +62,7 @@ nnoremap ]q :cnewer<CR>
 nnoremap [q :colder<CR>
 
 " folding
-nnoremap <Tab> za
+" nnoremap <Tab> za " DO NOT USE TAB!!
 
 " Completion
 set completeopt=menuone,noinsert
