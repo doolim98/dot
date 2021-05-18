@@ -51,7 +51,6 @@ function! CdToGit()
 	endif
 endfunction
 
-
 function! LoadGtagsConfig()
 	let csf=findfile("GTAGS", ".;")
 	let csp=matchstr(csf, ".*/")
