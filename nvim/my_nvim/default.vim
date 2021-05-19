@@ -8,7 +8,7 @@ set mouse=
 filetype plugin on
 
 " for CursorHold autocmd
-set updatetime=300	" NOTE : it can cause highlight glitchs
+set updatetime=800	" NOTE : it can cause highlight glitchs
 
 set smartindent
 set tabstop=4

@@ -2,7 +2,7 @@
 cd $(dirname "$0")
 
 lsdir(){
-	find $1 -maxdepth 1 -mindepth 1
+	find $1 -maxdepth 1 -mindepth 1 
 }
 
 # home config files
