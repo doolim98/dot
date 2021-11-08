@@ -109,6 +109,11 @@ fi
 
 ####### MY SETTINGS #######
 
+# env settings
+export PATH=/home/hjoll6/bin:$PATH
+export PATH=/home/hjoll6/.emacs.d/bin:$PATH
+export GIT_SSL_NO_VERIFY=1
+
 # export TERM=xterm-256color
 
 # ALIAS
@@ -215,5 +220,4 @@ function jupyter_server()
 # END USER CONFIG 
 export PATH=/home/hjoll6/pap/gcc-arm-10.2-2020.11-x86_64-aarch64-none-linux-gnu/bin:$PATH
 export PATH=/home/hjoll6/pap/qemu-5.2.0/build:$PATH
-export TEST=hello
 export PATH=/home/hjoll6/bin:$PATH

@@ -1,6 +1,8 @@
 " unmapped keys
 nnoremap <C-w><C-c> <Nop>
-" keymappings
+
+" simple keys
+nnoremap <CR> zz
 " For consistency C-c == Esc
 inoremap <C-c> <Esc>
 set pastetoggle=<F11>
@@ -39,6 +41,7 @@ nnoremap <Backspace> :bp<CR>
 
 " terminal
 tmap <C-c> <C-\><C-n>
+tnoremap <C-\><C-c> <C-c>
 
 " FIND
 " nnoremap <leader>ff <cmd>Telescope find_files<cr>

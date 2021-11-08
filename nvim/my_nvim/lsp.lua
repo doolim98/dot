@@ -38,8 +38,8 @@ local on_attach = function(client, bufnr)
 		vim.api.nvim_exec([[
 		augroup lsp_document_highlight
 		autocmd! * <buffer>
-		autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-		autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+		"autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+		"autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
 		augroup END
 		]], false)
 	end
@@ -50,9 +50,10 @@ local on_attach = function(client, bufnr)
 		-- Enable underline, use default values
 		underline = true,
 		-- Enable virtual text, override spacing to 4
-		virtual_text = {
-			spacing = 4,
-		},
+		virtual_text = false,
+		-- virtual_text = {
+		-- 	spacing = 4,
+		-- },
 		-- virtual_text = false,
 		-- Use a function to dynamically turn signs off
 		-- and on, using buffer local variables
