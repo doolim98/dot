@@ -5,20 +5,18 @@ lsdir(){
 	find $1 -maxdepth 1 -mindepth 1 
 }
 
-# home config files
-echo "HOME"
+# install neovim 
+mkdir -p ~/.bin
+wget https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
+chmod +x nvim.appimage
+mv nvim.appimage ~/.bin/nvim
+
+# install ohmyzsh
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+# link dot files
 ln -svf $(lsdir $PWD/home/) ~/
 
-# nvim config files
-echo "NEOVIM"
-mkdir -p ~/.config/nvim
-ln -svf $(lsdir $PWD/nvim/) ~/.config/nvim/
-
-# base16 config files
-echo "BASE16"
-ln -svf $PWD/base16-shell ~/.config
-
-# kitty config files
-echo "KITTY"
-mkdir -p ~/.config/kitty
-ln -svf $(lsdir $PWD/kitty/) ~/.config/kitty/
+# link .config files
+mkdir -p ~/.config
+ln -svf $(lsdir $PWD/config/) ~/.config
