@@ -2,11 +2,11 @@ define lsdir
 	$(shell find $(1) -maxdepth 1 -mindepth 1)
 endef
 
-.PHONY: nvim zsh link fonts
+.PHONY: nvim zsh link fonts pkgs/*
 
-all: bin nvim zsh link fonts pkgs/*
+all: dirs nvim zsh link fonts pkgs/*
 
-bin:
+dirs:
 	mkdir -p ~/.bin
 
 submodule:
@@ -23,13 +23,17 @@ zsh:
 	# ohmyzsh
 	sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-tmux:
-	cd pkgs/tmux && sh autogen.sh && ./configure && make
-	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+pkgs/tmux:
+	cd pkgs/tmux && sh autogen.sh && ./configure && make 
+	ln -s pkgs/tmux/tmux bin/
 
-fzf:
+pkgs/fzf:
 	pkgs/fzf/install --bin
-	cp pkgs/fzf/bin/* bin/
+	ln -s pkgs/fzf/bin/* bin/
+
+tpm:
+	mkdir -p ~/.tmux/plugins/tpm
+	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 fonts:
 	mkdir -p ~/.local/share/fonts
