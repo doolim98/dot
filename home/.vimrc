@@ -11,34 +11,9 @@ call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-commentary'
 Plug 'farmergreg/vim-lastplace'
 Plug 'mileszs/ack.vim'
-
-" Plug 'google/vim-maktaba'
-" Plug 'google/vim-codefmt'
-" Plug 'google/vim-glaive'
-" Plug 'prabirshrestha/vim-lsp'
-" Plug 'mattn/vim-lsp-settings'
+Plug 'preservim/nerdtree'
+Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
-
-
-" [] shortucts!!
-nnoremap ]w <C-w>w
-nnoremap [w <C-w>W
-nnoremap ]t gt
-nnoremap [t gT
-nnoremap ]q :cnewer<CR>
-nnoremap [q :colder<CR>
-
-
-function! LoadProjVimrc()
-	let file=findfile(".vimproj", ".;")
-	let path=matchstr(file, ".*/")
-	if !empty(file) && filereadable(file)
-		exe 'so' file
-	endif
-	if !empty(path)
-		exe 'cd' path
-	endif
-endfunction
 
 function! CdToGit()
 	let dir = finddir(".git", ".;")
@@ -60,54 +35,20 @@ function! LoadGtagsConfig()
 	endif
 endfunction
 
-function! LoadLinterConfig()
-	function! RunLinter()
-	endfunction
-	let g:linter=""
-	let g:linter_cmds={
-				\"python":"!pyflakes %",
-				\"c":"!cppcheck %"
-				\}
-	nnoremap <leader>xl :call RunLinter()<CR>
-
-	" augroup linter
-	" 	au!
-	" 	autocmd Filetype python let g:linter=g:py_linter
-	" 	autocmd Filetype c let g:linter=g:c_linter
-	" augroup END
-
-endfunction
-
 function! ToggleQuickFix()
 	if empty(filter(getwininfo(), 'v:val.quickfix'))
 		copen
 	else
 		cclose
-	endif
-endfunction
-
-function! GetOutputFromShell(cmd)
-	execute("silent !".a:cmd." > /tmp/.vim.tmp")
-	let ret = system("cat /tmp/.vim.tmp")
-	redraw!
-	return ret
-endfunction
-
-function! OpenFileFromShell(cmd)
-	let out = GetOutputFromShell(a:cmd)
-	if !empty(out)
-		exec "e" out
+		wincmd p
 	endif
 endfunction
 
 
-" apperance
+" default
+set noswapfile
 colorscheme default
-" set t_Co=256
-set term=xterm-256color
 set laststatus=2
-" set statusline=%f%=%P
-" set statusline=%f\ [%l/%L]%=%n
 set noshowcmd
 set signcolumn=no
 set fillchars=vert:\ 
@@ -116,60 +57,63 @@ set cmdheight=2
 set nocursorline
 set number
 set wildmenu
-highlight Pmenu ctermfg=245 ctermbg=255
-highlight PmenuSel ctermfg=16 ctermbg=255
-highlight PmenuSbar ctermfg=245 ctermbg=255
-highlight PmenuThumb ctermfg=16 ctermbg=16
 
 " simple settings
 let mapleader=" " 
 syntax on
 syntax sync fromstart
-set tags=./tags;/
-" set scrolloff=7
-set mouse=
 filetype plugin on
-set omnifunc=syntaxcomplete#Complete
+set tags=./tags;/
+set mouse=
 set smartindent
 set tabstop=4
 set shiftwidth=4
 set hidden
 set nobackup
 set nowritebackup
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 set shortmess=a
 set nocsverb
 set incsearch
 set ignorecase
 
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
 " keymappings
-set pastetoggle=<F11>
 nnoremap <Leader>r :so ~/.vimrc<CR>
 nnoremap <Leader>pi :PlugInstall<CR>
 nnoremap <Leader>b :ls<CR>:b
 nnoremap <Leader>m :make 
 nnoremap <Leader>s :w<CR>
-nnoremap <Leader>f :Ack <cword><CR>
-" nnoremap <Leader>o :Files<CR>
+" nnoremap <Leader>f :Ack <cword><CR>
+" nnoremap <Leader>
+
+" window
+nnoremap <Leader>wv <C-w>v<CR>
+nnoremap <Leader>ws <C-w>s<CR>
+nnoremap <Leader>wq <C-w>q<CR><C-w>p<CR>
+nnoremap <Leader>w= <C-w>=<CR>
+nnoremap <Leader>wp <C-w>p<CR>
+
+" Esc
+nnoremap <Esc> <C-c>
+cnoremap <Esc> <C-c>
+vnoremap <Esc> <C-c>
+
 nmap <C-_> <Plug>CommentaryLine
 vmap <C-_> <Plug>Commentary
-nnoremap <Leader>o :call OpenFileFromShell("fzf")<CR>
+
+" nnoremap <Leader>o :call OpenFileFromShell("fzf")<CR>
+noremap <silent> <leader>nt :NERDTreeToggle<cr>
+noremap <silent> <leader>nf :NERDTreeFind<cr>
 
 " quickfix
 nnoremap <silent> <C-n> :0cn<CR>
 nnoremap <silent> <C-p> :1cp<CR>
-nnoremap <silent> <Leader>q :call ToggleQuickFix()<cr>
+nnoremap <silent> <leader>q :call ToggleQuickFix()<cr>
 
 
 " search
 nnoremap <silent> <C-c> :noh<CR>
 
 set cscopequickfix=s-,g-,c-,d-,i-,t-,e-,a-
-
-
-" call LoadLinterConfig()
-
-" Proj level management
-call LoadProjVimrc()
-call LoadGtagsConfig()
-" call CdToGit()
