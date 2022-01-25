@@ -1,11 +1,9 @@
 [submodule "pkgs/fzf"]
 	path = pkgs/fzf
 	url = https://github.com/junegunn/fzf
-
 [submodule "pkgs/tmux"]
 	path = pkgs/tmux
 	url = https://github.com/tmux/tmux
-
-[submodule "pkgs/neovim"]
-	path = pkgs/neovim
-	url = https://github.com/neovim/neovim
+[submodule "pkgs/base16-shell"]
+	path = pkgs/base16-shell
+	url = https://github.com/chriskempson/base16-shell.git

@@ -1,17 +1,13 @@
-export ZSH=$HOME/.oh-my-zsh
 export dot=$HOME/dot
-export PATH=$dot/bin:$HOME/.local/bin:$HOME/.bin:/usr/local/bin:$PATH
-export PATH=$dot/tests:$PATH
-export PATH=$dot/bin:$PATH
+export PATH=$HOME/.local/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.bin:$PATH
 
-ZSH_THEME="eastwood"
-# Which plugins would you like to load?
+export ZSH=$HOME/.oh-my-zsh
 plugins=(
 	git 
 	# vi-mode
 )
 
-source $ZSH/oh-my-zsh.sh
 
 # Preferred editor for local and remote sessions
 export EDITOR='nvim'
@@ -20,15 +16,15 @@ if [[ -n $SSH_CONNECTION ]]; then
 fi
 
 # colorscheme
-# Base16 Shell
-BASE16_SHELL="$HOME/.config/base16-shell/"
+BASE16_SHELL="$dot/pkgs/base16-shell"
 [ -n "$PS1" ] && \
     [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
         eval "$("$BASE16_SHELL/profile_helper.sh")"
 
 base16_solarized-light
+ZSH_THEME="eastwood"
 
-# lazy shell
+# I am lazy..
 function cdls()
 {
 	cd $1
@@ -59,3 +55,4 @@ alias tv='tmux split-window -h'
 export PATH=$(llvm-config-12 --bindir):$PATH
 
 
+source $ZSH/oh-my-zsh.sh

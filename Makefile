@@ -11,22 +11,16 @@ submodule:
 	git submodule update --remote
 	# git submodule foreach git checkout master
 
+pkgs:
+	make -C pkgs 
+
 nvim:
 	wget https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
 	chmod +x nvim.appimage
 	mv nvim.appimage ~/.bin/nvim
 
-zsh:
-	# ohmyzsh
+ohmyzsh:
 	sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-pkgs/tmux:
-	cd pkgs/tmux && sh autogen.sh && ./configure && make 
-	ln -s pkgs/tmux/tmux bin/
-
-pkgs/fzf:
-	pkgs/fzf/install --bin
-	ln -s pkgs/fzf/bin/* bin/
 
 tpm:
 	mkdir -p ~/.tmux/plugins/tpm
@@ -36,7 +30,10 @@ fonts:
 	mkdir -p ~/.local/share/fonts
 	cp -r fonts ~/.local/share/fonts
 
-link:
+install:
+	mkdir -p ~/.bin
 	mkdir -p ~/.config
+	ln -svf $(PWD)/pkgs/fzf/bin/* ~/.bin/
+	ln -svf $(PWD)/pkgs/tmux/tmux ~/.bin/
 	ln -svf $(call lsdir,$(PWD)/home/) ~/
 	ln -svf $(call lsdir,$(PWD)/config/) ~/.config
