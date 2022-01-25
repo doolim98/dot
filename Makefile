@@ -6,12 +6,9 @@ endef
 
 all: dirs nvim zsh link fonts pkgs/*
 
-dirs:
-	mkdir -p ~/.bin
-
 submodule:
 	git submodule init
-	git submodule update
+	git submodule update --remote
 	# git submodule foreach git checkout master
 
 nvim:

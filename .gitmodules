@@ -5,8 +5,7 @@
 [submodule "pkgs/tmux"]
 	path = pkgs/tmux
 	url = https://github.com/tmux/tmux
-	branch = tags/3.2a
+
 [submodule "pkgs/neovim"]
 	path = pkgs/neovim
 	url = https://github.com/neovim/neovim
-	branch = tags/v0.6.1
