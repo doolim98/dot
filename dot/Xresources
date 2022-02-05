@@ -1,0 +1,24 @@
+XTerm.termName: xterm-256color
+XTerm.vt100.backarrowKey: false
+XTerm.ttyModes: erase ^?
+XTerm.vt100.translations: #override \n\
+    Ctrl <Key>1: string(0x1b) string("OP") \n\
+    Ctrl <Key>2: string(0x1b) string("OQ") \n\
+    Ctrl <Key>3: string(0x1b) string("OR") \n\
+    Ctrl <Key>4: string(0x1b) string("OS") \n\
+    Ctrl <Key>5: string(0x1b) string("[15~") \n\
+    Ctrl <Key>6: string(0x1b) string("[17~") \n\
+    Ctrl <Key>7: string(0x1b) string("[18~") \n\
+    Ctrl <Key>8: string(0x1b) string("[19~") \n\
+    Ctrl <Key>9: string(0x1b) string("[20~") \n\
+    Ctrl <Key>`: string(0x1b) string("`") \n\
+    Ctrl <Key>period: string(0x1b) string(".") \n\
+    Ctrl <Key>comma: string(0x1b) string(",") \n\
+    Ctrl <Key>semicolon: string(0x1b) string(";") \n\
+    Ctrl <Key>0: string(0x1b) string("'") \n\
+    Ctrl <Key>0: restore() 
+XTerm.vt100.metaSendsEscape: true
+
+XTerm.vt100.faceName: DejaVu Sans Mono:style=Book:antialias=true
+/* XTerm.vt100.faceNameDoublesize: WenQuanYi WenQuanYi Bitmap Song */
+XTerm.vt100.faceSize: 12

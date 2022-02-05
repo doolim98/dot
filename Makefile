@@ -1,39 +1,44 @@
-define lsdir
-	$(shell find $(1) -maxdepth 1 -mindepth 1)
-endef
+link-config:=$(abspath $(wildcard config/*))
+link-pkgs:=$(abspath $(wildcard pkgs/out/*))
+link-dot:=$(abspath $(wildcard dot/*))
 
-.PHONY: nvim zsh link fonts pkgs/*
+.PHONY: pkgs dot fonts config $(link-config) $(link-dot) $(link-pkgs)
 
-all: dirs nvim zsh link fonts pkgs/*
+all: submodules pkgs plugin-managers fonts install
 
-submodule:
+submodules:
 	git submodule init
 	git submodule update --remote
-	# git submodule foreach git checkout master
 
 pkgs:
 	make -C pkgs 
 
-nvim:
-	wget https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
-	chmod +x nvim.appimage
-	mv nvim.appimage ~/.bin/nvim
-
-ohmyzsh:
-	sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-tpm:
-	mkdir -p ~/.tmux/plugins/tpm
-	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-
 fonts:
 	mkdir -p ~/.local/share/fonts
 	cp -r fonts ~/.local/share/fonts
+	fc-cache -f -v
 
-install:
+install: 
 	mkdir -p ~/.bin
 	mkdir -p ~/.config
-	ln -svf $(PWD)/pkgs/fzf/bin/* ~/.bin/
-	ln -svf $(PWD)/pkgs/tmux/tmux ~/.bin/
-	ln -svf $(call lsdir,$(PWD)/home/) ~/
-	ln -svf $(call lsdir,$(PWD)/config/) ~/.config
+	make $(link-config) $(link-dot) $(link-pkgs)
+
+$(link-pkgs):
+	ln -svf $@ ~/.bin
+
+$(link-config):
+	ln -svf $@ ~/.config/
+
+$(link-dot):
+	ln -svf $@ ~/.$(notdir $@)
+
+# plugin managers
+plugin-managers: ohmyzsh tpm nvim-plug
+nvim-plug:
+	sh -c 'curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+	       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+ohmyzsh:
+	sh -c "$(shell curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+tpm:
+	mkdir -p ~/.tmux/plugins/tpm
+	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm

@@ -96,4 +96,3 @@ for i in `seq 255 -1 128`; do
     echo -n " "
 done
 resetOutput
-

@@ -7,3 +7,9 @@
 [submodule "pkgs/base16-shell"]
 	path = pkgs/base16-shell
 	url = https://github.com/chriskempson/base16-shell.git
+[submodule "pkgs/fzy"]
+	path = pkgs/fzy
+	url = https://github.com/jhawthorn/fzy
+[submodule "pkgs/emacs"]
+	path = pkgs/emacs
+	url = https://github.com/emacs-mirror/emacs
