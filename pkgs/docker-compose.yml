@@ -1,0 +1,13 @@
+version: "3.4"
+services:
+  pkgs:
+    user: root
+    entrypoint: /bin/sh
+    build:
+      context: .
+      dockerfile: Dockerfile
+      network: host
+    volumes:
+      - type: bind
+        source: .
+        target: /home/root

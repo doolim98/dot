@@ -18,8 +18,14 @@
 		- one editor did not do one thing
 	- highlight words(symbol) (* in vim)
 		- 
+	- windows
+		- select (1 2 3 4)( keyboard number)
+			- open in new window (1 2 3 4)
+		- move (1 2 3 4)
+			- goto window 1 2 3 4
 	- buffers
 		- goto prev/next buffer
+			- HL
 	- code
 		- jump list
 		- goto def
@@ -37,3 +43,7 @@
 	- delete
 		- backspace : delete(one character in normal mode)
 		- i : delete and goto insert
+
+# Learning new script languages.
+- Integrated Man(Help) page.
+- Debugging Tool.

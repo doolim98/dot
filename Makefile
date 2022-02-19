@@ -18,6 +18,7 @@ fonts:
 	cp -r fonts ~/.local/share/fonts
 	fc-cache -f -v
 
+# link all binaries
 install: 
 	mkdir -p ~/.bin
 	mkdir -p ~/.config

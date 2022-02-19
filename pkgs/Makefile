@@ -1,26 +1,43 @@
 outdir := out
 
-targets := tmux fzf fzy nvim 
+targets := tmux fzf fzy nvim emacs
+
+EMACS_VERSION:=tags/emacs-27.2
 
 .PHONY: $(targets) clean
 all: $(targets)
 
-tmux: tmux/configure
+define run_docker_cmd
+	sudo docker-compose run --entrypoint $(1) pkgs \
+		&& sudo docker-compose rm -fsv
+endef
+
+# set git repo branchs
+init:
+	cd emacs && git checkout $(EMACS_VERSION) && git clean -xdf
+
+emacs:
+	cd emacs && ./autogen.sh autoconf && ./configure --with-x-toolkit=lucid
+	$(call run_docker_cmd,make -C emacs -j$(shell nproc))
+
+emacs-install:
+	cd emacs && make install
+	cp emacs/src/emacs $(outdir)
+
+tmux: 
+	cd tmux && sh autogen.sh && ./configure 
 	make -C tmux
-	ln -svf $(abspath tmux/tmux) $(outdir)
+	cp tmux/tmux $(outdir)
 
 fzf: 
 	fzf/install --bin
-	ln -svf $(abspath fzf/bin/*) $(outdir)
+	cp fzf/bin/* $(outdir)
 
 fzy: 
 	make -C fzy
-	ln -svf $(abspath fzy/fzy) $(outdir)
+	cp fzy/fzy $(outdir)
 
 nvim: $(outdir)/nvim
-
-tmux/configure: 
-	cd tmux && sh autogen.sh && ./configure 
 
 $(outdir)/nvim:
 	wget https://github.com/neovim/neovim/releases/download/stable/nvim.appimage

@@ -18,12 +18,18 @@ if use_ansi_color
 	colorscheme dim
 	set background=dark
 	hi! link VertSplit Normal
-else
+else " use 256 color
 	set termguicolors
 	set background=light
-	" set cursorline
+	set cursorline
 	colorscheme solarized-flat
 endif
+
+augroup AutoCursorLine
+	au!
+	au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+	au WinLeave * setlocal nocursorline
+augroup END
 
 " custom highlights
 " hi Cursor
