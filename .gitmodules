@@ -13,3 +13,6 @@
 [submodule "pkgs/emacs"]
 	path = pkgs/emacs
 	url = https://github.com/emacs-mirror/emacs
+[submodule "pkgs/xcape"]
+	path = pkgs/xcape
+	url = https://github.com/alols/xcape

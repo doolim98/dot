@@ -1,6 +1,6 @@
 outdir := out
 
-targets := tmux fzf fzy nvim emacs
+targets := tmux fzf fzy nvim emacs xcape
 
 EMACS_VERSION:=tags/emacs-27.2
 
@@ -36,6 +36,10 @@ fzf:
 fzy: 
 	make -C fzy
 	cp fzy/fzy $(outdir)
+
+xcape:
+	sudo apt-get install -y git gcc make pkg-config libx11-dev libxtst-dev libxi-dev
+	cd xcape && make && sudo make install
 
 nvim: $(outdir)/nvim
 

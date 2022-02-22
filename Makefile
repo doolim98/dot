@@ -34,12 +34,10 @@ $(link-dot):
 	ln -svf $@ ~/.$(notdir $@)
 
 # plugin managers
-plugin-managers: ohmyzsh tpm nvim-plug
+plugin-managers: tpm nvim-plug
 nvim-plug:
 	sh -c 'curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
 	       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-ohmyzsh:
-	sh -c "$(shell curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 tpm:
 	mkdir -p ~/.tmux/plugins/tpm
 	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
