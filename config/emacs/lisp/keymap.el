@@ -2,7 +2,8 @@
 (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
 
 ;; evil-mode
-(when nil
+; (when nil
+
 (progn 
   (my-require-package 'evil)
   (setq evil-want-C-u-scroll t)

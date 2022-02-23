@@ -18,6 +18,15 @@ fonts:
 	cp -r fonts ~/.local/share/fonts
 	fc-cache -f -v
 
+xkb-config: EVDEV=/usr/share/X11/xkb/keycodes/evdev
+xkb-config:
+	# for ubuntu
+	# swap ESC <-> TLDE
+	if [ ! -e $(EVDEV).old ]; then sudo cp $(EVDEV) $(EVDEV).old; fi
+	sudo sed -E -i 's/(<ESC>.*=.*)\s[0-9]+/\1 49/g' $(EVDEV)
+	sudo sed -E -i 's/(<TLDE>.*=.*)\s[0-9]+/\1 9/g' $(EVDEV)
+	setxkbmap -layout us
+
 # link all binaries
 install: 
 	mkdir -p ~/.bin

@@ -1,15 +1,5 @@
 #!/bin/sh
 
 # remap keys
-# original ESC:9, Ctrl:37, CapsLock:66
-# xmodmap -e "keycode 9 = Caps_Lock NoSymbol Caps_Lock"   
-xmodmap -e "clear Lock"
-xmodmap -e "clear Control"
-xmodmap -e "add Control = Control_R"
-xmodmap -e "add Control = Control_L"
-
-xmodmap -e "keycode 37 = Caps_Lock NoSymbol Caps_Lock"  
-xmodmap -e "keycode 66 = Control_L NoSymbol Control_L"
-# xcape -e 'Shift_L=Escape;Control_L=Control_L|O'
 pkill xcape
-xcape -e 'Control_L=Escape'
+(sleep 1 && xcape -e 'Control_L=Escape')&
