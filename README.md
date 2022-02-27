@@ -1,3 +1,6 @@
+# IDEAS
+- Directory Shortcuts
+	- Copy current selections 
 # TODO
 - nerd tree toggle
 - oh-my-zsh to zplug

@@ -27,6 +27,21 @@ xkb-config:
 	sudo sed -E -i 's/(<TLDE>.*=.*)\s[0-9]+/\1 9/g' $(EVDEV)
 	setxkbmap -layout us
 
+zotero:
+	wget -qO- https://apt.retorque.re/file/zotero-apt/install.sh | sudo bash
+	sudo apt update
+	sudo apt install zotero
+
+google-drive:
+	sudo apt install opam
+	opam init
+	opam update
+	opam install depext -y
+	opam depext google-drive-ocamlfuse -y
+	opam install google-drive-ocamlfuse -y
+	mkdir -p ~/google-drive
+	google-drive-ocamlfuse ~/google-drive
+
 # link all binaries
 install: 
 	mkdir -p ~/.bin

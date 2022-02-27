@@ -1,4 +1,4 @@
-# plugin manager
+# plugin manager 'antigen'
 mkdir -p $HOME/.local
 export ANTIGEN_ZSH=$HOME/.local/antigen.zsh
 if [[ ! -a $ANTIGEN_ZSH ]];then 
@@ -11,33 +11,21 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen theme eastwood
 antigen apply
 
-export dot=$HOME/dot
+# ENV
 export PATH=$HOME/.local/bin:/usr/local/bin:$PATH
 export PATH=$HOME/.bin:$PATH
+export PATH=$HOME/.opam/default/bin:$PATH
 
 # Preferred editor for local and remote sessions
 export EDITOR='nvim'
 
-function add_current_path()
+function add_path_env()
 {
-	export PATH=$PWD:$PATH
-	echo "export PATH=$PWD:\$PATH" >> ~/.zshrc
+	touch ~/.zshenv
+	new_path=$(realpath $1)
+	export PATH=$new_path:$PATH
+	echo "export PATH=$new_path:\$PATH" >> ~/.zshenv
 }
-
-function wtest()
-{
-	find_cmd='find . -type f|fzy'
-	tmux_cmd="tmux popup -E '$find_cmd'"
-	# BUFFER+="tmux popup -E $find_cmd"
-	output=$(sh -c $tmux_cmd)
-	BUFFER+=$output
-	zle end-of-line
-}
-
-zle -N wtest
-
-bindkey '^Q' wtest
-
 
 # my alias
 alias e='$EDITOR'
@@ -52,14 +40,7 @@ alias bbb='cd ../../..'
 alias bbbb='cd ../../../..'
 alias tr='tree --filelimit=20 --dirsfirst -L 3'
 
-alias reload_zshrc='source ~/.zshrc'
-
 # tmux
 alias tmux='tmux -2'
 alias ts='tmux split-window'
 alias tv='tmux split-window -h'
-
-# llvm config
-# export PATH=$(llvm-config-12 --bindir):$PATH
-
-export PATH=/home/hjoll6/lab/wasm-kmod/wasm-micro-runtime/product-mini/platforms/linux:$PATH

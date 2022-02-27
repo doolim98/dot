@@ -19,3 +19,10 @@
 ;; optimizations
 (setq load-prefer-newer t)
 (setq read-process-output-max (* 1024 1024))
+
+;; Package Settings
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+(add-to-list 'package-archives '("nongnu" . "https://elpa.nongnu.org/nongnu/"))
+(package-initialize)
+; (package-refresh-contents)
