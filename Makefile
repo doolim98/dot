@@ -6,6 +6,19 @@ link-dot:=$(abspath $(wildcard dot/*))
 
 all: submodules pkgs plugin-managers fonts install
 
+apt-essentials:
+	sudo apt install -y build-essential python3 git automake docker
+	sudo apt install -y vim emacs
+	sudo apt install -y net-tools
+	sudo apt install -y curl wget 
+
+apt-desktop: apt-essentials
+	sudo apt install -y libevdev-dev xcape gnome-tweaks
+
+apt-laptop: apt-desktop
+	sudo apt install -y synaptic
+
+
 submodules:
 	git submodule init
 	git submodule update --remote
