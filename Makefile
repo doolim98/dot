@@ -1,18 +1,20 @@
-link-config:=$(abspath $(wildcard config/*))
-link-pkgs:=$(abspath $(wildcard pkgs/out/*))
-link-dot:=$(abspath $(wildcard dot/*))
-
 .PHONY: pkgs dot fonts config $(link-config) $(link-dot) $(link-pkgs)
 
 all: submodules pkgs plugin-managers fonts install
 
+# USE APT!
 apt-essentials:
 	sudo apt install -y build-essential python3 git automake docker
 	sudo apt install -y vim emacs
 	sudo apt install -y net-tools
 	sudo apt install -y curl wget 
 
+apt-fonts:
+	sudo apt install fonts-firacode
+	sudo apt install fonts-cantarell
+
 apt-desktop: apt-essentials
+	sudo add-apt-repository universe
 	sudo apt install -y libevdev-dev xcape gnome-tweaks
 
 apt-laptop: apt-desktop
@@ -55,20 +57,16 @@ google-drive:
 	mkdir -p ~/google-drive
 	google-drive-ocamlfuse ~/google-drive
 
-# link all binaries
+# link all
 install: 
 	mkdir -p ~/.bin
 	mkdir -p ~/.config
-	make $(link-config) $(link-dot) $(link-pkgs)
-
-$(link-pkgs):
-	ln -svf $@ ~/.bin
-
-$(link-config):
-	ln -svf $@ ~/.config/
-
-$(link-dot):
-	ln -svf $@ ~/.$(notdir $@)
+	# for f in $(shell ls -dA ./pkgs/out);	do ln -svf $$f ~/.bin; 		done
+	# for f in $(shell ls -dA ./config); 		do ln -svf $$f ~/.config; 	done
+	# for f in $(shell ls -dA ./dot); 		do ln -svf $$f ~/; 			done
+	for f in $(shell ls -d ./pkgs/out/*); 	do ln -svf $(abspath $$f) ~/.bin; done
+	for f in $(shell ls -d ./config/*); 	do ln -svf $(abspath $$f) ~/.config; done
+	for f in $(shell ls -d ./dot/.*); 		do ln -svf $(abspath $$f) ~/; done
 
 # plugin managers
 plugin-managers: tpm nvim-plug

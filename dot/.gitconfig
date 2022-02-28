@@ -1,0 +1,7 @@
+[oh-my-zsh]
+	hide-dirty = 1
+[user]
+	email = doolim98@gmail.com
+	name = dooli98
+[core]
+	excludesfile = /home/hoejoa/.gitignore
