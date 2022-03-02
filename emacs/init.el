@@ -84,13 +84,7 @@
 (show-paren-mode 1)
 (save-place-mode)
 
-;; Key bindings
-(defun my/define-keys()
-  (global-set-key (kbd "C-x r") (lambda()(interactive)(load-my-file "init.el")))
-  (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
-  )
-(my/define-keys)
-(add-hook 'evil-mode-hook 'my/define-keys)
+(recentf-mode 1)
 
 (use-package general
 					; :after evil
@@ -105,10 +99,11 @@
 					;   "tt" '(counsel-load-theme :which-key "choose theme")
 					;   "fde" '(lambda () (interactive) (find-file (expand-file-name "~/.emacs.d/Emacs.org")))))
   )
-
 (use-package undo-tree
   :config
-  (global-undo-tree-mode)
+  ;; just let evil mode use undo-tree with c-/ key bindings
+  (defun undo-tree-overridden-undo-bindings-p () nil)
+  (global-undo-tree-mode t)
   )
 
 (use-package evil
@@ -120,12 +115,13 @@
   :config
   (evil-mode 1)
   (evil-set-undo-system 'undo-tree)
-  (global-undo-tree-mode)
+  (global-undo-tree-mode t)
   (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
   (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
   (define-key evil-normal-state-map (kbd "C-\/") 'comment-line)
-  (define-key evil-normal-state-map (kbd ":") 'counsel-M-x)
   (define-key evil-visual-state-map (kbd "C-\/") 'comment-dwim)
+  (define-key evil-normal-state-map (kbd ":") 'counsel-M-x)
+  (define-key evil-normal-state-map (kbd "C-x") nil)
 
   ;; Use visual line motions even outside of visual-line-mode buffers
 					; (evil-global-set-key 'motion "j" 'evil-next-visual-line)
@@ -138,6 +134,15 @@
   :after evil
   :config
   (evil-collection-init))
+
+;; Key bindings
+(defun my/define-keys()
+  (interactive)
+  (global-set-key (kbd "C-x R") (lambda()(interactive)(load-my-file "init.el")))
+  (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
+  (message "bind my keys")
+  )
+(my/define-keys)
 
 (use-package command-log-mode
   :commands command-log-mode)
@@ -169,6 +174,7 @@
 	 ("C-d" . ivy-reverse-i-search-kill)
 	 )
   :config
+  (setq ivy-height 20)
   (ivy-mode 1))
 
 (use-package ivy-rich
@@ -176,14 +182,34 @@
   :init
   (ivy-rich-mode 1))
 
+;; (use-package ivy-posframe
+;;   :config
+;;   ;; display at `ivy-posframe-style'
+;;   (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display)))
+;;   ;; (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center)))
+;;   ;; (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-window-center)))
+;;   ;; (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-bottom-left)))
+;;   ;; (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-window-bottom-left)))
+;;   ;; (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-top-center)))
+;;   (setq ivy-posframe-parameters
+;; 	'((left-fringe . 8)
+;; 	  (right-fringe . 8)))
+;;   (ivy-posframe-mode nil)
+;;   )
+
 (use-package counsel
-; :bind (("C-M-j" . 'counsel-switch-buffer)
-;        :map minibuffer-local-map
-;        ("C-r" . 'counsel-minibuffer-history))
-; :custom
-; (counsel-linux-app-format-function #'counsel-linux-app-format-function-name-only)
+					; :bind (("C-M-j" . 'counsel-switch-buffer)
+					;        :map minibuffer-local-map
+					;        ("C-r" . 'counsel-minibuffer-history))
+					; :custom
+					; (counsel-linux-app-format-function #'counsel-linux-app-format-function-name-only)
   :config
   (counsel-mode 1))
+
+(use-package smex
+  :config
+  (smex-initialize)
+  )
 
 
 (use-package hydra
@@ -201,3 +227,4 @@
 
 (load-my-file "org.el")
 (load-my-file "dev.el")
+(load-my-file "layout.el")

@@ -64,9 +64,9 @@ install:
 	# for f in $(shell ls -dA ./pkgs/out);	do ln -svf $$f ~/.bin; 		done
 	# for f in $(shell ls -dA ./config); 		do ln -svf $$f ~/.config; 	done
 	# for f in $(shell ls -dA ./dot); 		do ln -svf $$f ~/; 			done
-	for f in $(shell ls -d ./pkgs/out/*); 	do ln -svf $(abspath $$f) ~/.bin; done
-	for f in $(shell ls -d ./config/*); 	do ln -svf $(abspath $$f) ~/.config; done
-	for f in $(shell ls -d ./dot/.*); 		do ln -svf $(abspath $$f) ~/; done
+	for f in $(shell ls -d pkgs/out/*); 	do ln -svf $(abspath $$f) ~/.bin; done
+	for f in $(shell ls -d config/*); 	do ln -svf $(abspath $$f) ~/.config; done
+	for f in $(shell ls -d dot/.*); 		do ln -svf $(abspath $$f) ~/; done
 
 # plugin managers
 plugin-managers: tpm nvim-plug
