@@ -1,3 +1,12 @@
+;; Pair
+(electric-pair-mode 1)
+(setq electric-pair-preserve-balance nil)
+
+;; Default Coding Style
+(setq-default tab-width 4)
+(setq c-default-style "linux"
+      c-basic-offset 4)
+
 (use-package company
   :after lsp-mode
   :hook (lsp-mode . company-mode)
