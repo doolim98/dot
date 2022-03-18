@@ -54,15 +54,19 @@
 (setq frame-resize-pixelwise t)
 
 
-;; Column
+;; Column Number
 (column-number-mode)
 (global-display-line-numbers-mode t)
 (dolist (mode '(org-mode-hook
-		term-mode-hook
-		shell-mode-hook
-		treemacs-mode-hook
-		eshell-mode-hook))
+				term-mode-hook
+				dired-mode-hook
+				shell-mode-hook
+				treemacs-mode-hook
+				eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
+
+;; Dired Mode Hook
+(add-hook 'dired-mode-hook (lambda () (dired-hide-details-mode 1)))
 
 ;; Set built-in packages
 (setq show-paren-delay 0)
@@ -105,6 +109,7 @@
   (evil-set-undo-system 'undo-tree)
   (global-undo-tree-mode t)
   (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
+  (define-key evil-insert-state-map (kbd "C-c") 'evil-normal-state)
   (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
   (define-key evil-normal-state-map (kbd "C-\/") 'comment-line)
   (define-key evil-visual-state-map (kbd "C-\/") 'comment-dwim)
