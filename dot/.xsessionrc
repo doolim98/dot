@@ -2,4 +2,5 @@
 
 # remap keys
 pkill xcape
-(sleep 1 && xcape -e 'Control_L=Escape')&
+xcape -e 'Control_L=Escape'
+# (sleep 1 && xcape -e 'Control_L=Escape')&

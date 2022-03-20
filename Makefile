@@ -13,9 +13,11 @@ apt-fonts:
 	sudo apt install fonts-firacode
 	sudo apt install fonts-cantarell
 
-apt-desktop: apt-essentials
+apt-desktop: apt-essentials apt-fonts
 	sudo add-apt-repository universe
+	sudo apt update
 	sudo apt install -y libevdev-dev xcape gnome-tweaks
+	sudo apt install -y scrcpy
 
 apt-laptop: apt-desktop
 	sudo apt install -y synaptic
