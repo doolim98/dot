@@ -1,3 +1,12 @@
+;; Pair
+(electric-pair-mode 1)
+(setq electric-pair-preserve-balance nil)
+
+;; Default Coding Style
+(setq-default tab-width 4)
+(setq c-default-style "linux"
+      c-basic-offset 4)
+
 (use-package company
   :after lsp-mode
   :hook (lsp-mode . company-mode)
@@ -16,6 +25,11 @@
   :commands magit-status
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
+(use-package markdown-mode
+  :ensure t
+  :mode ("README\\.md\\'" . gfm-mode)
+  :init (setq markdown-command "multimarkdown")
+  )
 
 (use-package eglot)
 

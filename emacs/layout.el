@@ -1,5 +1,5 @@
-(defun my/layout()
-  (interactive)
-  (message "hello")
-  (message "my layout")
-  )
+;; dired
+;; buffer
+
+;; help
+;; (help-window-select t)
