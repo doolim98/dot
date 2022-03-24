@@ -8,7 +8,7 @@ function! TmuxPopUp(cmd,w='50%',h='50%')
 endfunction
 
 function! TmuxPopUpFzy(cmd,prompt='>')
-	return TmuxPopUp(a:cmd." | fzy -l 50 --prompt='".a:prompt."'",80,25)
+	return TmuxPopUp(a:cmd." | fzy -l 50 --prompt='".a:prompt."'",120,35)
 	" return TmuxPopUp(a:cmd." | fzf ",70,15)
 endfunction
 

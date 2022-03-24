@@ -9,14 +9,15 @@ function fzy_tmux_popup(cmd)
 	return vim.fn.system(tmux_cmd)
 end
 
+function fzy_tmux_popup_select(candidates)
+	-- TODO fix it
+	return fzy_tmux_popup('echo \"'..table.concat(candidates,'\n')..'\"')
+end
+
 function fzy_find_file(path)
 	local nline=20
 	local cmd='find '..path..' -type d,f'..' | fzy -l '..nline
 	return fzy_tmux_popup(cmd)
-end
-
-function fzy_cwd()
-	return fzy_find_file(vim.fn.getcwd())
 end
 
 function fzy_open_file()
@@ -27,7 +28,11 @@ function fzy_open_file()
 end
 
 function fzy_open_buffer()
-	-- local bufferinfo = vim.fn.getbufferinfo({hidden=1})
-	local bufferinfo = vim.api.nvim_list_buffers()
-	print(bufferinfo)
+	local bufferinfo = vim.api.nvim_list_bufs()
+	local buffer_names = {}
+	for i in ipairs(bufferinfo) do
+		buffer_names[i]=vim.api.nvim_buf_get_name(i)
+	end
+	return fzy_tmux_popup_select(buffer_names)
 end
+

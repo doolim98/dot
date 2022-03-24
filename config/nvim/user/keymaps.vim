@@ -4,12 +4,32 @@ let maplocalleader = " "
 " simple shortcuts
 nnoremap <Leader>pi :PlugInstall<CR>
 nnoremap <Leader>s :w<CR>
-nnoremap <C-s> :wa<CR>
+nnoremap <C-s> :w<CR>
+
+" quickfix
+" nnoremap <Leader>q :call ToggleQuickFix()<CR>
+nnoremap <Leader>qq :copen<CR>
+nnoremap <Leader>qo :colder<CR>
+nnoremap <Leader>qn :cnewer<CR>
+nnoremap <C-b> :colder<CR>
+nnoremap <C-f> :cnewer<CR>
+nnoremap <C-n> :cn<CR>
+nnoremap <C-p> :cp<CR>
+
+" grep
+" nnoremap <Leader>g :vimgrep //gj **/*<left><left><left><left><left><left><left><left>
+nnoremap <Leader>g :Ack <cword>
+" nnoremap <Leader>g :Ack 
+
+" ack
+
 
 nnoremap <Leader>1 1gt
 nnoremap <Leader>2 2gt
 nnoremap <Leader>3 3gt
 nnoremap <Leader>4 4gt
+nnoremap <Leader>5 5gt
+nnoremap <Leader>6 6gt
 
 " goto previous window
 nnoremap <C-w><C-w> <C-w>p 
@@ -20,14 +40,13 @@ nnoremap <Leader><Leader>v :source %<CR>
 nnoremap <Leader><Leader>r :so $MYVIMRC<CR>
 nnoremap <Leader><Leader>m :messages<CR>
 
-nnoremap <CR> zz
+" toggle settings
+nnoremap <Leader>tt :TSBufToggle highlight<CR>
 
 " buffer mappings
 nnoremap <S-h> :bp<CR>
 nnoremap <S-l> :bn<CR>
-nnoremap <S-Q> q
-nnoremap q :call Layout_bd()<CR>
-
+" nnoremap q :call Layout_bd()<CR>
 
 " prefix shortcuts
 nnoremap <Leader>m :make 
@@ -74,3 +93,5 @@ let g:NERDTreeMapJumpPrevSibling = '<Nop>'
 nmap <C-_> <Plug>CommentaryLine
 vmap <C-_> <Plug>Commentary
 
+" 
+nnoremap <C-.> :echom "hello"<CR>

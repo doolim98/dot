@@ -1,5 +1,18 @@
 " nerdtree settings
 let NERDTreeChDirMode=3
+let NERDTreeUseTCD=1
+
+" fzf
+
+" set wildignore+=*.o,*.ko,*.,*.obj,*.wasm
+
+" grep settings
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+if executable('ag')
+  let g:grepprg = 'ag --vimgrep'
+endif
 
 " custom file realted scripts
 function! NNNManageFiles(path=getcwd())
@@ -48,7 +61,8 @@ endfunction
 function! FzyFileCmd(path=getcwd())
 	let rpath = a:path->fnamemodify(':p:.')
 	let hpath = a:path->fnamemodify(':p:~')
-	let find_cmd = 'fdfind . '.rpath
+	" let find_cmd = 'fdfind . '.rpath
+	let find_cmd = 'fdfind . -H'.rpath
 	let result = TmuxPopUpFzy(find_cmd, ':e '.hpath)
 	" if filereadable(result) || isdirectory(result)
 	if result is 0 || empty(result)
@@ -58,3 +72,4 @@ function! FzyFileCmd(path=getcwd())
 		call execute(cmd.' '.result)
 	endif
 endfunction
+

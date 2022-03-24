@@ -1,5 +1,22 @@
 " settings
-" set tabline=%!MyTabLine()
+set tabline=%!MyTabLine()
+"
+
+" set NERDTreeWinPos
+let NERDTreeMinimalUI=1
+
+" quickfix
+
+function! ToggleQuickFix()
+    if empty(filter(getwininfo(), 'v:val.quickfix'))
+		call execute("copen")
+    else
+		call execute("cclose")
+    endif
+endfunction
+
+function! RefreshNerdTreePos()
+endfunction
 
 function! Layout_bd()
 	let prev_bufnr=bufnr()
@@ -56,8 +73,10 @@ endfunction
 
 function! MyTabLabel(n)
   let buflist = tabpagebuflist(a:n)
-  let winnr = tabpagewinnr(a:n)
-  " return bufname(buflist[winnr - 1])
-  return a:n.':'.winnr->getcwd()->fnamemodify(":t")
+  " let winnr = tabpagewinnr(a:n)
+  " let tabnr = tabpagenr(a:n)
+  " return a:n.':'.bufname(buflist[winnr - 1])
+  " return a:n.':'.winnr->getcwd()->fnamemodify(":t")
+  return a:n.':'.getcwd(-1,a:n)->fnamemodify(":t")
 endfunction
 

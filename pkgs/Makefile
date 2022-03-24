@@ -11,18 +11,6 @@ define run_docker_cmd
 		&& sudo docker-compose rm -fsv
 endef
 
-# set git repo branchs
-init:
-	cd emacs && git checkout $(EMACS_VERSION) && git clean -xdf
-
-$(outdir)/emacs:EMACS_VERSION=tags/emacs-27.2
-$(outdir)/emacs:
-	cd emacs && ./autogen.sh autoconf && ./configure --with-x-toolkit=lucid
-	$(call run_docker_cmd,make -C emacs -j$(shell nproc))
-	cp emacs/src/emacs $(outdir)
-
-emacs: $(outdir)/emacs
-	cd emacs && make install
 tmux: $(outdir)/tmux
 nvim: $(outdir)/nvim
 fzf: $(outdir)/fzf

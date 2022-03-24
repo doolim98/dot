@@ -13,7 +13,6 @@ apt-deb-src:
 	sudo sed -ir 's/#\s*deb-src/deb-src/g' /etc/apt/sources.list
 	sudo apt update
 
-
 apt-fonts:
 	sudo apt install fonts-firacode
 	sudo apt install fonts-cantarell

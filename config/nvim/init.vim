@@ -13,10 +13,15 @@ Plug 'jeffkreeftmeijer/vim-dim'
 Plug 'godlygeek/tabular'
 Plug 'preservim/vim-markdown'
 
+" find
+Plug 'junegunn/fzf'
+
 " devtools
+Plug 'tpope/vim-fugitive'
 Plug 'dense-analysis/ale'
 " Plug 'jiangmiao/auto-pairs'
 " Plug 'tpope/vim-endwise'
+Plug 'mileszs/ack.vim'
 Plug 'tpope/vim-commentary'
 Plug 'vim-scripts/gtags.vim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
