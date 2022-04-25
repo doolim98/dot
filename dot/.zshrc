@@ -31,11 +31,6 @@ function add_path_env()
 	echo "export PATH=$new_path:\$PATH" >> ~/.zshenv
 }
 
-function reload_zshrc()
-{
-}
-
-
 # my alias
 alias e='$EDITOR'
 alias pu.='pushd .'
@@ -48,6 +43,8 @@ alias bb='cd ../..'
 alias bbb='cd ../../..'
 alias bbbb='cd ../../../..'
 alias tr='tree --filelimit=20 --dirsfirst -L 3'
+
+# options
 
 # tmux
 alias tmux='tmux -2'

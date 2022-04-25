@@ -25,7 +25,7 @@ Plug 'mileszs/ack.vim'
 Plug 'tpope/vim-commentary'
 Plug 'vim-scripts/gtags.vim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'romgrk/nvim-treesitter-context'
+" Plug 'romgrk/nvim-treesitter-context'
 " Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 call plug#end()
 
