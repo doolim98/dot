@@ -17,6 +17,7 @@ antigen apply
 export PATH=$HOME/.local/bin:/usr/local/bin:$PATH
 export PATH=$HOME/.bin:$PATH
 export PATH=$HOME/.opam/default/bin:$PATH
+export PATH=$HOME/.cargo/bin:$PATH
 export EDITOR='nvim'
 
 # Base16 Shell

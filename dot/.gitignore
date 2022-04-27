@@ -1,3 +1,10 @@
 .project.el
 .project.vim
+GTAGS
+GPATH
+GRTAGS
+*~
+*.swp
+*.nfs*
+.*.swp
 !.*

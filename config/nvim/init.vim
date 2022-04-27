@@ -19,6 +19,7 @@ Plug 'junegunn/fzf'
 " devtools
 Plug 'tpope/vim-fugitive'
 Plug 'dense-analysis/ale'
+Plug 'vim-scripts/gtags.vim'
 " Plug 'jiangmiao/auto-pairs'
 " Plug 'tpope/vim-endwise'
 Plug 'mileszs/ack.vim'
