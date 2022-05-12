@@ -9,20 +9,12 @@ fi
 source $ANTIGEN_ZSH
 antigen use oh-my-zsh
 antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle aperezdc/zsh-fzy
 antigen theme eastwood
 antigen apply
 
 # ENV
 export PATH=$HOME/.local/bin:/usr/local/bin:$PATH
-export PATH=$HOME/.bin:$PATH
-export PATH=$HOME/.opam/default/bin:$PATH
-export PATH=$HOME/.cargo/bin:$PATH
 export EDITOR='nvim'
-
-# Base16 Shell
-BASE16_SHELL="$HOME/.config/base16-shell/scripts"
-source $BASE16_SHELL/base16-solarized-light.sh
 
 function add_path_env()
 {
@@ -45,16 +37,12 @@ alias bbb='cd ../../..'
 alias bbbb='cd ../../../..'
 alias tr='tree --filelimit=20 --dirsfirst -L 3'
 
-# options
-
 # tmux
 alias tmux='tmux -2'
 alias ts='tmux split-window'
 alias tv='tmux split-window -h'
 
 # key bindings
-bindkey '^Qd' fzy-cd-widget
-bindkey '^Qf'  fzy-file-widget
-bindkey '^Qh'  fzy-history-widget
-# bindkey '^P'  fzy-proc-widget
-
+# bindkey '^Qd' fzy-cd-widget
+# bindkey '^Qf'  fzy-file-widget
+# bindkey '^Qh'  fzy-history-widget

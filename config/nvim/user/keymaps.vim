@@ -41,7 +41,7 @@ nnoremap <Leader><Leader>r :so $MYVIMRC<CR>
 nnoremap <Leader><Leader>m :messages<CR>
 
 " toggle settings
-nnoremap <Leader>tt :TSToggleAll highlight<CR>
+nnoremap <Leader>tt :TSBufToggle highlight<CR>
 
 " buffer mappings
 nnoremap <S-h> :bp<CR>
@@ -59,9 +59,6 @@ nnoremap <Leader>b :call FzyFindBuffer()<CR>
 nnoremap <Leader>f :call NNNManageFiles()<CR>
 nnoremap <Leader>c :call FzyFileCmd()<CR>
 
-" Code Navigation
-" Gtags
-nnoremap <C-g> :Gtags 
 " ALE
 nnoremap ge :ALENextWrap<CR>
 nnoremap gE :ALEPreviousWrap<CR>

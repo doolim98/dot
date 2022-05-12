@@ -1,6 +1,3 @@
 #!/bin/sh
 
 # remap keys
-pkill xcape
-xcape -e 'Control_L=Escape'
-# (sleep 1 && xcape -e 'Control_L=Escape')&
