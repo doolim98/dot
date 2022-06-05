@@ -14,6 +14,7 @@ antigen apply
 
 # ENV
 export PATH=$HOME/.local/bin:/usr/local/bin:$PATH
+export PATH=$HOME/dot/scripts:$PATH
 export EDITOR='nvim'
 
 function add_path_env()
