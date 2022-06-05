@@ -36,7 +36,6 @@ alias b='cd ..'
 alias bb='cd ../..'
 alias bbb='cd ../../..'
 alias bbbb='cd ../../../..'
-alias tr='tree --filelimit=20 --dirsfirst -L 3'
 
 # tmux
 alias tmux='tmux -2'
