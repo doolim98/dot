@@ -1,4 +1,3 @@
-mkdir -p $HOME/.local
 export ANTIGEN_ZSH=$HOME/.local/antigen.zsh
 export ANTIGEN_BUNDLES=$HOME/.antigen/bundles
 [[ ! -e $ANTIGEN_ZSH ]] && curl -L git.io/antigen > $ANTIGEN_ZSH
