@@ -1,0 +1,9 @@
+[submodule "pkgs/fzf"]
+	path = pkgs/fzf
+	url = https://github.com/junegunn/fzf
+[submodule "pkgs/tmux"]
+	path = pkgs/tmux
+	url = https://github.com/tmux/tmux
+[submodule "pkgs/fzy"]
+	path = pkgs/fzy
+	url = https://github.com/jhawthorn/fzy

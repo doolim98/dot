@@ -1,24 +1,37 @@
-#!/bin/bash
-cd $(dirname "$0")
+#!/bin/bash -eu
 
-lsdir(){
-	find $1 -maxdepth 1 -mindepth 1 
+cd "$(dirname "$0")"
+
+DIR="$PWD"
+
+HOME_PATH="$HOME"
+CONFIG_PATH="$HOME_PATH/.config"
+
+BACKUP_DIR="$DIR/.backup"
+
+mkdir -p "$HOME_PATH" "$CONFIG_PATH" "$BACKUP_DIR"
+
+V(){
+	echo "$@"
+	"$@"
 }
 
-# home config files
-echo "HOME"
-ln -svf $(lsdir $PWD/home/) ~/
+link_files(){
+	SRC_PATH=$(realpath "$1")
+	DST_PATH=$(realpath "$2")
+	cd "$SRC_PATH"
+	for file in $(ls -A) ;do
+		dst="$DST_PATH/$file"
+		if [ -L "$dst" ];then 
+			rm "$dst"
+		elif [ -e "$dst" ];then
+			V mv "$dst" "$BACKUP_DIR/$file.$(date +%s)"
+		fi
+		V ln -s "$SRC_PATH/$file" "$dst"
+	done
+	cd "$DIR"
+}
 
-# nvim config files
-echo "NEOVIM"
-mkdir -p ~/.config/nvim
-ln -svf $(lsdir $PWD/nvim/) ~/.config/nvim/
+link_files './home' "$HOME_PATH"
+link_files './config' "$CONFIG_PATH"
 
-# base16 config files
-echo "BASE16"
-ln -svf $PWD/base16-shell ~/.config
-
-# kitty config files
-echo "KITTY"
-mkdir -p ~/.config/kitty
-ln -svf $(lsdir $PWD/kitty/) ~/.config/kitty/

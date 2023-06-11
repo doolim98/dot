@@ -1,0 +1,4 @@
+.project.el
+.project.vim
+**/.vscode
+compile_commands.json
