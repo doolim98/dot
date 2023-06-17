@@ -86,6 +86,101 @@
                             }
                         ]
                     },
+		    {
+			"description":"iTerm2 meta <-> option key",
+			"manipulators":[
+			    {
+				"conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "com.googlecode.iterm2"
+                                        ],
+                                        "file_paths": [
+                                            "ck2\\.app",
+                                            "eu4\\.app"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+				"from":{
+				    "key_code":"left_command"
+				},
+				"to":{
+				    "key_code":"left_option"
+				},
+				"type":"basic"
+			    },
+			    {
+				"conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "com.googlecode.iterm2"
+                                        ],
+                                        "file_paths": [
+                                            "ck2\\.app",
+                                            "eu4\\.app"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+				"from":{
+				    "key_code":"left_option"
+				},
+				"to":{
+				    "key_code":"left_command"
+				},
+				"type":"basic"
+			    }
+			]
+		    },
+		    {
+			"description": "opt+tab -> cmd+tab",
+			"manipulators": [
+			    {
+				"type": "basic",
+				"from": {
+				    "key_code": "tab",
+				    "modifiers": {
+					"mandatory": [
+					    "option"
+					]
+				    }
+				},
+				"to": [
+				    {
+					"key_code": "tab",
+					"modifiers": [
+					    "command"
+					]
+				    }
+				]
+			    }
+			]
+		    },
+		    {
+			"description": "opt+` -> cmd+`",
+			"manipulators": [
+			    {
+				"type": "basic",
+				"from": {
+				    "key_code": "grave_accent_and_tilde",
+				    "modifiers": {
+					"mandatory": [
+					    "option"
+					]
+				    }
+				},
+				"to": [
+				    {
+					"key_code": "grave_accent_and_tilde",
+					"modifiers": [
+					    "command"
+					]
+				    }
+				]
+			    }
+			]
+		    },
                     {
                         "description": "(Atom, CKII, EUIV, iTerm, muCommander, PyCharm, VSCodium, WebStorm, AndroidStudio) Function keys work as fn keys",
                         "manipulators": [
