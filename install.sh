@@ -11,11 +11,6 @@ BACKUP_DIR="$DIR/.backup"
 
 mkdir -p "$HOME_PATH" "$CONFIG_PATH" "$BACKUP_DIR"
 
-V(){
-	echo "$@"
-	"$@"
-}
-
 link_files(){
 	SRC_PATH=$(realpath "$1")
 	DST_PATH=$(realpath "$2")
@@ -25,9 +20,9 @@ link_files(){
 		if [ -L "$dst" ];then 
 			rm "$dst"
 		elif [ -e "$dst" ];then
-			V mv "$dst" "$BACKUP_DIR/$file.$(date +%s)"
+			mv "$dst" "$BACKUP_DIR/$file.$(date +%s)"
 		fi
-		V ln -s "$SRC_PATH/$file" "$dst"
+		ln -s "$SRC_PATH/$file" "$dst"
 	done
 	cd "$DIR"
 }
